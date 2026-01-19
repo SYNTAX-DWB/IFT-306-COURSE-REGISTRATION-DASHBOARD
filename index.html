@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Registration Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Student Course Registration & Data Dashboard</h1>
+
+    <!-- PART A: Course Registration -->
+    <section class="registration">
+        <h2>Course Registration</h2>
+
+        <form id="registrationForm">
+            <input type="text" id="studentName" placeholder="Student Name">
+            <input type="text" id="matricNumber" placeholder="Matric Number (LCU/CS/2023/001)">
+            <input type="text" id="courseCode" placeholder="Course Code">
+            <input type="text" id="courseTitle" placeholder="Course Title">
+            <button type="submit">Register Course</button>
+        </form>
+
+        <p id="formError"></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Matric Number</th>
+                    <th>Course Code</th>
+                    <th>Course Title</th>
+                </tr>
+            </thead>
+            <tbody id="courseTable"></tbody>
+        </table>
+    </section>
+
+    <!-- PART B: Integrated Data Dashboard -->
+    <section class="dashboard">
+        <h2>Integrated Data Dashboard</h2>
+
+        <button id="refreshData">Refresh Data</button>
+
+        <p id="loading">Loading...</p>
+        <p id="apiError"></p>
+
+        <div id="apiData"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
