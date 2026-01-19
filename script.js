@@ -1,15 +1,14 @@
-// ==== PART A: Course Registration Logic ====
+// ===== PART A: Course Registration =====
 const form = document.getElementById("registrationForm");
 const tableBody = document.getElementById("courseTable");
 const errorMsg = document.getElementById("formError");
 
-// Load stored courses or start empty
+// Load courses from localStorage or start with empty array
 let courses = JSON.parse(localStorage.getItem("courses")) || [];
 
 // Display courses on page load
 displayCourses();
 
-// Handle form submission
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -33,23 +32,29 @@ form.addEventListener("submit", function (e) {
 
     errorMsg.textContent = "";
 
-    // Add course to array
+    // Add new course to array
     const courseData = { studentName, matricNumber, courseCode, courseTitle };
     courses.push(courseData);
 
-    // Save to localStorage
+    // Save updated array to localStorage
     localStorage.setItem("courses", JSON.stringify(courses));
 
     // Refresh table
     displayCourses();
 
-    // Clear form
+    // Clear form inputs
     form.reset();
 });
 
 // Function to display courses in table
 function displayCourses() {
     tableBody.innerHTML = "";
+
+    if (courses.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="4">No courses registered yet</td></tr>`;
+        return;
+    }
+
     courses.forEach(course => {
         tableBody.innerHTML += `
             <tr>
@@ -62,14 +67,12 @@ function displayCourses() {
     });
 }
 
-
-// ==== PART B: Integrated Data Dashboard ====
+// ===== PART B: Integrated Data Dashboard =====
 const apiData = document.getElementById("apiData");
 const loading = document.getElementById("loading");
 const apiError = document.getElementById("apiError");
 const refreshBtn = document.getElementById("refreshData");
 
-// Fetch API data
 async function fetchUserData() {
     loading.style.display = "block";
     apiError.textContent = "";
@@ -95,7 +98,7 @@ async function fetchUserData() {
     }
 }
 
-// Refresh button event
+// Refresh button
 refreshBtn.addEventListener("click", fetchUserData);
 
 // Load data on page open
